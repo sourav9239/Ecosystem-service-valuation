@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECOSYSTEM SERVICE VALUATION OF METROPOLITAN CITY'S</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        .content {
+            padding: 20px;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .footer-links a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        color: white;
+        height: 100vh;
+        overflow: hidden;
+        position: relative;
+    }
+
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 600vw;
+        height: 100vh;
+        z-index: -1;
+        animation: scrollBackground 15s infinite ease-in-out;
+        display: flex;
+        background-size: cover;
+        background-repeat: no-repeat;
+        transform: translateX(0);
+        background-image:
+            url('https://static2.tripoto.com/media/transfer/img/OgData/1500874108_victoria_memorial_hall_kolkata.jpg'),
+            url('https://wallpapers.com/images/hd/delhi-red-fort-facade-548ewabeu7s7nrvv.jpg'),
+            url('https://www.rentomojo.com/blog/wp-content/uploads/2019/10/shutterstock_749994316.jpg'),
+            url('https://static.vecteezy.com/system/resources/previews/007/804/434/non_2x/chennai-skyline-with-gray-landmarks-blue-sky-and-reflections-vector.jpg'),
+            url('https://assets.thehansindia.com/h-upload/2023/06/08/1356429-1356403-hyderabad.jpg'),
+            url('https://wallpaperaccess.com/full/1906271.jpg');
+        background-position:
+            0vw 0,
+            100vw 0,
+            200vw 0,
+            300vw 0,
+            400vw 0,
+            500vw 0;
+        background-size: 100vw 100vh;
+    }
+
+    @keyframes scrollBackground {
+        0%   { transform: translateX(0); }
+        16.66% { transform: translateX(0); }
+        20%  { transform: translateX(-100vw); }
+        33.32% { transform: translateX(-100vw); }
+        36.66% { transform: translateX(-200vw); }
+        49.98% { transform: translateX(-200vw); }
+        53.32% { transform: translateX(-300vw); }
+        66.64% { transform: translateX(-300vw); }
+        70%  { transform: translateX(-400vw); }
+        83.3% { transform: translateX(-400vw); }
+        86.66% { transform: translateX(-500vw); }
+        100% { transform: translateX(-500vw); }
+    }
+
+    .form-row {
+        display: flex;
+        gap: 20px;
+        align-items: flex-end;
+        margin-bottom: 15px;
+        flex-wrap: wrap;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-group label {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .form-group select {
+        padding: 5px;
+        width: 200px;
+    }
+
+    .search-button {
+        padding: 8px 20px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    </style>
+    <script>
+        window.onload = function() {
+            if (performance.navigation.type === 2) {
+                location.reload(true);
+            }
+        };
+    </script>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="nav-button active">Home</a>
+        <a href="objectives.html" class="nav-button">Objectives & Problem</a>
+        <a href="https://sites.google.com/view/methodologyesv/home" class="nav-button" target="_blank">Methodology</a>
+        <a href="Analysis.html" class="nav-button">Analysis & Discussion</a>
+        <a href="conclusion.html" class="nav-button">Conclusion & Recommendation</a>
+        <a href="acknowledgement.html" class="nav-button">Acknowledgment & Our Team</a>
+    </nav>
+
+    <div class="content">
+        <h1>Welcome to the Study Analysis & Discussion Page</h1>
+        <p>Select A Metropoliton and Tipical Object</p>
+
+        <div class="search-section">
+            <form id="searchForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="city">Select City:</label>
+                        <select id="city" name="city" required>
+                            <option value="" disabled selected>--Choose City--</option>
+                            <option value="kolkata">Kolkata</option>
+                            <option value="delhi">Delhi</option>
+                            <option value="mumbai">Mumbai</option>
+                            <option value="chennai">Chennai</option>
+                            <option value="hyderabad">Hyderabad</option>
+                            <option value="bangalore">Bangalore</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="analysisType">Analysis Type:</label>
+                        <select id="analysisType" name="analysisType" required>
+                            <option value="" disabled selected>--Choose Analysis Type--</option>
+                            <option value="landuse">Land Use</option>
+                            <option value="change">Change Index</option>
+                            <option value="dematel">Dematel</option>
+                            <option value="esv">Ecosystem Service Valuation(ESV)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" id="yearGroup">
+                        <label for="year">Select Year:</label>
+                        <select id="year" name="year" required>
+                            <option value="" disabled selected>--Choose Year--</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="search-button">Search</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="objectives.html">Objectives</a>
+            <a href="https://sites.google.com/view/methodologyesv/home" class="nav-button" target="_blank">Methodology</a>
+            <a href="Analysis.html">Analysis & Discussion</a>
+            <a href="conclusion.html">Conclusion</a>
+            <a href="acknowledgement.html">Acknowledgement</a>
+        </div>
+        <div class="scrolling-text">
+            © 2025 All Team-Member | All Rights Reserved
+        </div>
+    </footer>
+
+    <script>
+        const yearSelect = document.getElementById("year");
+        const analysisSelect = document.getElementById("analysisType");
+        const yearGroup = document.getElementById("yearGroup");
+
+        const yearOptions = {
+            default: [
+                { value: "", text: "--Choose Year--" },
+                { value: "1990", text: "1990" },
+                { value: "2000", text: "2000" },
+                { value: "2010", text: "2010" },
+                { value: "2020", text: "2020" }
+            ],
+            ranged: [
+                { value: "", text: "--Choose Year--" },
+                { value: "1990-2000", text: "1990-2000" },
+                { value: "2000-2010", text: "2000-2010" },
+                { value: "2010-2020", text: "2010-2020" },
+                { value: "1990-2020", text: "1990-2020" }
+            ]
+        };
+
+        function updateYearOptions(type) {
+            if (type === "esv") {
+                yearGroup.style.display = "none";
+                yearSelect.required = false;
+                return;
+            } else {
+                yearGroup.style.display = "flex";
+                yearSelect.required = true;
+            }
+
+            yearSelect.innerHTML = "";
+            const selectedOptions = (type === "dematel" || type === "change") ? yearOptions.ranged : yearOptions.default;
+            selectedOptions.forEach(opt => {
+                const option = document.createElement("option");
+                option.value = opt.value;
+                option.textContent = opt.text;
+                yearSelect.appendChild(option);
+            });
+        }
+
+        analysisSelect.addEventListener("change", function () {
+            updateYearOptions(this.value);
+        });
+
+        const cityLinks = {
+            kolkata: {
+                landuse: {
+                    "1990": "https://kunalgis2025.github.io/kolkata_90/",
+                    "2000": "https://kunalgis2025.github.io/2000_kolkata/",
+                    "2010": "https://kunalgis2025.github.io/2010_kolkata/",
+                    "2020": "https://kunalgis2025.github.io/2020_kolkata/"
+                },
+                change: {
+                    "1990-2000": "https://aish-ricky21.github.io/Land_use-Change-of-Kolkata_1990_2000/",
+                    "2000-2010": "https://aish-ricky21.github.io/Land_use-Change-of-Kolkata_2000_2010/",
+                    "2010-2020": "https://aish-ricky21.github.io/Landuse_Change_Of_Kolkata_2010_2020/",
+                    "1990-2020": "https://aish-ricky21.github.io/Landuse_Change_Of_Kolkata_1990_2020/"
+                },
+                dematel: {
+                    "1990-2000": "https://lookerstudio.google.com/u/0/reporting/67e1e78e-3db9-425f-a32b-72ff9667748c/page/xYYJF",
+                    "2000-2010": "https://lookerstudio.google.com/u/0/reporting/2494862e-088d-4caa-ae73-7f3795c887e5/page/bQ6JF",
+                    "2010-2020": "https://lookerstudio.google.com/u/0/reporting/e2f69ed5-eeb2-485a-8c44-5cdc43d433d2/page/NU6JF",
+                    "1990-2020": "https://lookerstudio.google.com/u/0/reporting/dcbe1eb6-e859-4f3d-94a2-7404b726b461/page/SX6JF"
+                },
+                esv: "https://pri0111.github.io/KOLKATA_WEB/"
+            },
+            delhi: {
+                landuse: {
+                    "1990": "https://kunalgis2025.github.io/1990_delhi/",
+                    "2000": "https://kunalgis2025.github.io/2000_delhi/",
+                    "2010": "https://kunalgis2025.github.io/2010_delhi/",
+                    "2020": "https://kunalgis2025.github.io/2020_delhi/"
+                },
+                change: {
+                    "1990-2000": "https://aish-ricky21.github.io/Land_Use_Analysis_of_Delhi_1990_2000/",
+                    "2000-2010": "https://aish-ricky21.github.io/Landuse_Change_Of_Delhi_2000_2010/",
+                    "2010-2020": "https://aish-ricky21.github.io/Landuse_Change_Of_Delhi_2010_2020/",
+                    "1990-2020": "https://aish-ricky21.github.io/Landuse_Change_Of_Delhi_1990_2020/"
+                },
+                dematel: {
+                    "1990-2000": "https://example.com/delhi/dematel/1990-2000",
+                    "2000-2010": "https://example.com/delhi/dematel/2000-2010",
+                    "2010-2020": "https://example.com/delhi/dematel/2010-2020",
+                    "1990-2020": "https://example.com/delhi/dematel/1990-2020"
+                },
+                esv: "https://pri0111.github.io/DELHI_WEB/"
+            },
+            mumbai: {
+                landuse: {
+                    "1990": "https://kunalgis2025.github.io/1990_mumbai/",
+                    "2000": "https://kunalgis2025.github.io/2000_mumbai/",
+                    "2010": "https://kunalgis2025.github.io/2010_mumbai/",
+                    "2020": "https://kunalgis2025.github.io/2020_mumbai/"
+                },
+                change: {
+                    "1990-2000": "https://aish-ricky21.github.io/Landuse_Change_Of_Mumbai_1990_2000/",
+                    "2000-2010": "https://aish-ricky21.github.io/Landuse_Change_Of_Mumbai_2000_2010/",
+                    "2010-2020": "https://aish-ricky21.github.io/Landuse_Change_Of_Mumbai_2010_2020/",
+                    "1990-2020": "https://aish-ricky21.github.io/Landuse_Change_Of_Mumbai_1990_2020/"
+                },
+                dematel: {
+                    "1990-2000": "https://lookerstudio.google.com/reporting/7a867f93-f35a-482d-bedb-55d6359ffe34/page/0xNIF",
+                    "2000-2010": "https://lookerstudio.google.com/u/0/reporting/c30d8e0e-322d-4de8-8962-bb8105f6959a/page/15UIF",
+                    "2010-2020": "https://lookerstudio.google.com/u/0/reporting/8676f171-287d-404e-ad03-798cb95803ed/page/S4UIF",
+                    "1990-2020": "https://lookerstudio.google.com/u/0/reporting/f48426c3-00f6-4667-a2ae-bf3ca5bf74b3/page/aqWIF"
+                },
+                esv: "https://pri0111.github.io/MUMBAI_WEB/"
+            },
+            chennai: {
+                landuse: {
+                    "1990": "https://kunalgis2025.github.io/1990_chennai/",
+                    "2000": "https://kunalgis2025.github.io/2000_chennai/",
+                    "2010": "https://kunalgis2025.github.io/2010_chennai/",
+                    "2020": "https://kunalgis2025.github.io/2020_chennai/"
+                },
+                change: {
+                    "1990-2000": "https://aish-ricky21.github.io/Landuse_Change_Of_Chennai_1990_2000/",
+                    "2000-2010": "https://aish-ricky21.github.io/Landuse_Change_Of_Chennai_2000_2010/",
+                    "2010-2020": "https://aish-ricky21.github.io/Landuse_Change_Of_Chennai_2010_2020/",
+                    "1990-2020": "https://aish-ricky21.github.io/Landuse_Change_Of_Chennai_1990_2020/"
+                },
+                dematel: {
+                    "1990-2000": "https://lookerstudio.google.com/u/0/reporting/63780ad1-f328-4921-ac2b-1f00f0f098fa/page/MSPJF",
+                    "2000-2010": "https://lookerstudio.google.com/u/0/reporting/2872d3ff-3977-4ddc-8736-7456357787e9/page/pzPJF",
+                    "2010-2020": "https://lookerstudio.google.com/u/0/reporting/992666fd-54fe-4053-a7a4-7a15c3a4ff61/page/eYQJF",
+                    "1990-2020": "https://lookerstudio.google.com/u/0/reporting/6059412d-ad75-461e-ab89-a2fe9455966f/page/DoQJF"
+                },
+                esv: "https://pri0111.github.io/CHENNAI_WEB/"
+            },
+            hyderabad: {
+                landuse: {
+                    "1990": "https://kunalgis2025.github.io/1990_hydra/",
+                    "2000": "https://kunalgis2025.github.io/2000_hyderabad/",
+                    "2010": "https://kunalgis2025.github.io/2010_hyderabad/",
+                    "2020": "https://kunalgis2025.github.io/2020_hyderabad/"
+                },
+                change: {
+                    "1990-2000": "https://aish-ricky21.github.io/Landuse_Change_Of_Hyderabad_1990_2000/",
+                    "2000-2010": "https://aish-ricky21.github.io/Landuse_Change_Of_Hyderabad_2000_2010/",
+                    "2010-2020": "https://aish-ricky21.github.io/Landuse_Change_Of_Hyderabad_2010_2020/",
+                    "1990-2020": "https://aish-ricky21.github.io/Landuse_Change_Of_Hyderabad_1990_2020/"
+                },
+                dematel: {
+                    "1990-2000": "https://lookerstudio.google.com/reporting/1196e800-4f57-4f0e-abda-f9cc55590662/page/qa6JF",
+                    "2000-2010": "https://lookerstudio.google.com/u/0/reporting/59de87c6-cb85-4779-afd3-1700bc7c7d9f/page/7b6JF",
+                    "2010-2020": "https://lookerstudio.google.com/u/0/reporting/d1516851-906d-4cc6-bd67-d486fee65bbc/page/wLEKF",
+                    "1990-2020": "https://lookerstudio.google.com/u/0/reporting/711cc473-4f52-41b3-aa3c-d1e8ced15825/page/KVEKF"
+                },
+                esv: "https://pri0111.github.io/HYDRABAD_WEB/"
+            },
+            bangalore: {
+                landuse: {
+                    "1990": "https://kunalgis2025.github.io/1990_bangalore/",
+                    "2000": "https://kunalgis2025.github.io/2000_bangalore/",
+                    "2010": "https://kunalgis2025.github.io/2010_bangalore/",
+                    "2020": "https://kunalgis2025.github.io/2020_bangalore/"
+                },
+                change: {
+                    "1990-2000": "https://aish-ricky21.github.io/Land_use-Change-of-Bengaluru-1990_2000/",
+                    "2000-2010": "https://aish-ricky21.github.io/Land_use-Change-of-Bengaluru-2000_2010/",
+                    "2010-2020": "https://aish-ricky21.github.io/Landuse_Change_Of_Bengaluru_2010_2020/",
+                    "1990-2020": "https://aish-ricky21.github.io/Land_use-Change-of-Bengaluru-1990_2020/"
+                },
+                dematel: {
+                    "1990-2000": "https://lookerstudio.google.com/u/0/reporting/30f8f78a-0264-441c-840f-3034b56ebbef/page/8ScIF",
+                    "2000-2010": "https://lookerstudio.google.com/u/0/reporting/facc7f4f-cc90-4d40-8ab0-4a8b8aec852f/page/kkcIF",
+                    "2010-2020": "https://lookerstudio.google.com/u/0/reporting/e29aaf1f-fc7c-4809-9ce6-8b6df9a61506/page/ZOOJF",
+                    "1990-2020": "https://lookerstudio.google.com/u/0/reporting/4af232c2-b475-4d6f-b447-866cc6b4406b/page/6VOJF"
+                },
+                esv: "https://pri0111.github.io/BANGALORE_WEB/"
+            }
+        };
+
+        // Handle form submission
+        document.getElementById('searchForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            var city = document.getElementById('city').value;
+            var analysisType = document.getElementById('analysisType').value;
+            var year = document.getElementById('year').value;
+
+            // Check if valid combination exists
+            if (city && analysisType) {
+                let targetLink = cityLinks[city]?.[analysisType];
+                if(analysisType === 'esv'){
+                    if(targetLink){
+                         window.location.href = targetLink;
+                    }
+                    else{
+                         alert("No data available for the selected combination.");
+                    }
+
+                }
+                else if (year) {
+                    targetLink = cityLinks[city]?.[analysisType]?.[year];
+                    if (targetLink) {
+                        window.location.href = targetLink;
+                    } else {
+                        alert("No data available for the selected combination.");
+                    }
+                }
+                 else {
+                    alert("Please select all options correctly.");
+                }
+            } else {
+                alert("Please select all options correctly.");
+            }
+        });
+
+        // Initial load
+        updateYearOptions(analysisSelect.value);
+    </script>
+</body>
+</html>

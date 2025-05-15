@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ECOSYSTEM SERVICE VALUATION OF METROPOLITAN CITIES</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="objectives-page">
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <a href="index.html" class="nav-button">Home</a>
+    <a href="objectives.html" class="nav-button active">Objectives & Problem</a>
+     <a href="https://sites.google.com/view/methodologyesv/home" class="nav-button" target="_blank">Methodology</a>
+    <a href="Analysis.html" class="nav-button">Analysis & Discussion</a>
+    <a href="conclusion.html" class="nav-button">Conclusion & Recommendation</a>
+    <a href="acknowledgement.html" class="nav-button">Acknowledgment & Our Team</a>
+  </nav>
+
+  <!-- Objectives and Problems Section -->
+  <div class="content">
+    <h1>Objectives & Problems of the Study</h1>
+    <p>Select a metropoliton city and tipical objective</p>
+    
+    <!-- Dropdowns and Go Button -->
+    <div class="dropdown-container">
+      <!-- City Dropdown -->
+      <select id="cityDropdown" class="city-dropdown">
+        <option value="">Select City</option>
+        <option value="kolkata">Kolkata</option>
+        <option value="mumbai">Mumbai</option>
+        <option value="hyderabad">Hyderabad</option>
+        <option value="delhi">Delhi</option>
+        <option value="chennai">Chennai</option>
+        <option value="bangalore">Bangalore</option>
+      </select>
+
+      <!-- Objective Type Dropdown -->
+      <select id="objectiveTypeDropdown" class="objective-type-dropdown">
+        <option value="">Select Type</option>
+        <option value="primary">Primary Objective</option>
+        <option value="specific">Specific Objective</option>
+        <option value="problem">Problem</option>
+      </select>
+
+      <!-- Go Button -->
+      <button onclick="showDetails()" class="go-button">Go</button>
+    </div>
+
+    <!-- Display Area -->
+    <div id="detailsDisplay" class="details-display"></div>
+  </div>
+
+  <script>
+    function showDetails() {
+      const cityDropdown = document.getElementById("cityDropdown");
+      const objectiveTypeDropdown = document.getElementById("objectiveTypeDropdown");
+      const detailsDisplay = document.getElementById("detailsDisplay");
+      const selectedCity = cityDropdown.value;
+      const selectedType = objectiveTypeDropdown.value;
+
+      // Define data for each city and type
+      const cityData = {
+        kolkata: {
+          primary: {
+            text: "Flood Control, Air Quality Improvement, and Cultural Value in Kolkata.",
+            backgroundImage: "url('image/KOLKATA.jpg')"
+          },
+          specific: {
+            text: "Detailed quantification of flood control, air purification, and recreational value.",
+            backgroundImage: "url('image/KOLKATA.jpg')"
+          },
+          problem: {
+            text: "Flooding issues, air pollution, and degradation of recreational spaces in Kolkata.",
+            backgroundImage: "url('image/KOLKATA.jpg')"
+          }
+        },
+        // Add similar data for other cities...
+        mumbai: {
+          primary: {
+            text: "Flood Resilience, Biodiversity, and Coastal Ecosystem Services in Mumbai.",
+            backgroundImage: "url('image/MUMBAI.jpg')"
+          },
+          specific: {
+            text: "Quantify mangrove benefits, biodiversity values, and recreation services.",
+            backgroundImage: "url('image/MUMBAI.jpg')"
+          },
+          problem: {
+            text: "Coastal erosion, habitat destruction, and reduced air quality in Mumbai.",
+            backgroundImage: "url('image/MUMBAI.jpg')"
+          }
+        }
+        // Add for hyderabad, delhi, chennai, bangalore as in your data...
+      };
+
+      if (selectedCity && selectedType && cityData[selectedCity]) {
+        const cityInfo = cityData[selectedCity][selectedType];
+        detailsDisplay.textContent = cityInfo.text;
+        document.body.style.backgroundImage = cityInfo.backgroundImage;
+      } else {
+        detailsDisplay.textContent = "Please select valid options.";
+        document.body.style.backgroundImage = "";
+      }
+    }
+    
+  </script>
+  <footer>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="objectives.html">Objectives</a>
+      <a href="https://sites.google.com/view/methodologyesv/home" class="nav-button" target="_blank">Methodology</a>
+      <a href="Analysis.html">Analysis & Discussion</a>
+      <a href="conclusion.html">Conclusion</a>
+      <a href="acknowledgement.html">Acknowledgement</a>
+    </div>
+    <div class="scrolling-text">
+      © 2025 All Team-Member | All Rights Reserved
+    </div>
+  </footer>
+  
+</body>
+</html>
+

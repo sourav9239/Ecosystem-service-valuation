@@ -1,0 +1,688 @@
+/* General reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Times New Roman', Times, serif, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Container for consistent padding */
+.container {
+  padding: 10px 10%;
+}
+
+/* Style for navigation buttons */
+.nav-button {
+  position: relative;
+  color: #070000;
+  font-size: 15px;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 7px 7px;
+  transition: color 0.3s ease;
+}
+
+/* Red underline effect with looping animation on hover */
+.nav-button::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0;
+  height: 2px;
+  background-color: #ff004f;
+  transition: width 3ms ease;
+}
+
+/* Hover effect to animate underline */
+.nav-button:hover::after {
+  width: 100%;
+  transition: width 0.5s ease; /* Smooth transition */
+}
+
+.nav-button:hover {
+  color: #ff004f; /* Optional: change color on hover */
+}
+
+/* Animation to loop underline while hovering */
+@keyframes underlineLoop {
+  0%, 100% { width: 0; }
+  50% { width: 100%; }
+}
+
+/* Applying the animation on hover */
+.nav-button:hover::after {
+  animation: underlineLoop 1.5s infinite; /* Infinite loop */
+}
+
+/* Background Slider Styling */
+.background-slider {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.background-slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.background-slide:nth-child(1) {
+  opacity: 1;
+  animation: slide 30s infinite;
+}
+
+@keyframes slide {
+  0% { opacity: 1; }
+  16.67%, 83.35% { opacity: 0; }
+  50.01% { opacity: 1; }
+}
+
+/* Content Styling */
+.content {
+  text-align: center;
+  color: #8116ec;
+  padding: 100px 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.content h1 {
+  font-size: 3em;
+  margin-bottom: 10px;
+}
+
+.content p {
+  font-size: 2em;
+}
+
+/* Image and Description Section */
+.image-description-section {
+  margin: 200px auto;
+  padding: 30px;
+  max-width: 1200px;
+}
+
+.image-box {
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+  padding: 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.image-box:hover {
+  animation: blink 0.5s infinite alternate;
+}
+
+@keyframes blink {
+  0% { background-color: rgba(255, 0, 79, 0.1); }
+  100% { background-color: rgba(255, 0, 81, 0.575); }
+}
+
+.image-box.right .video {
+  order: 1;
+}
+
+.image-box.left .video {
+  order: 2;
+}
+
+.image-box.right .description {
+  order: 2;
+  padding-left: 10px;
+}
+
+.image-box.left .description {
+  order: 1;
+  padding-right: 10px;
+}
+
+.video {
+  width: 150%;
+  height: 200px; /* Adjust height for shorter descriptions */
+  border-radius: 8px;
+  overflow: hidden;
+  border: 3px solid rgb(0, 0, 0);
+}
+
+video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.description {
+  width: 300%;
+}
+
+.description h2 {
+  margin-bottom: 10px;
+  font-size: .90em;
+}
+
+.description p {
+  font-size: .90em;
+  color: #000000;
+}
+
+/* Center content container */
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+  color: #ffffff;
+}
+
+
+/* Heading with underline */
+.content h1 {
+  font-size: 20px;
+  color: #ff004f;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.content h1::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 3px;
+  background-color: #ff004f;
+  margin: 8px auto 0;
+}
+
+/* Dropdown container centered */
+.dropdown-container {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* Dropdown styling */
+.city-dropdown {
+  padding: 8px 15px;
+  font-size: 16px;
+}
+
+/* Go button styling */
+.go-button {
+  padding: 10px 30px;
+  font-size: 16px;
+  background-color: #ff004f;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.go-button:hover {
+  background-color: #d40042;
+}
+
+/* Objective display styling */
+.city-objective {
+  max-width: 600px;
+  margin-top: 20px;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.6);
+  color: #ffffff;
+  border-radius: 10px;
+  text-align: center;
+}
+
+/* Background color */
+body.objectives-page {
+  background-color: rgb(248, 160, 160);
+}
+
+body.objectives-page {
+  background-color: rgb(157, 157, 157);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: background-image 0.5s ease-in-out;
+}
+
+/* Other styling remains the same */
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  transition: background-image 0.5s ease-in-out;
+  background-color: #ffffff;
+}
+
+/* Content Styling */
+.content {
+  text-align: center;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 2em;
+  margin-bottom: 10px;
+  color: #a2a0a0f4;
+}
+
+p {
+  margin-bottom: 20px;
+  color: #004ee9;
+}
+
+/* Dropdown Container */
+.dropdown-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+/* Dropdown Styling */
+.city-dropdown,
+.objective-type-dropdown {
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.city-dropdown:hover,
+.objective-type-dropdown:hover {
+  border-color: #017cff;
+}
+
+/* Go Button Styling */
+.go-button {
+  padding: 10px 20px;
+  font-size: 1em;
+  border: none;
+  border-radius: 5px;
+  background-color: #ecd67a;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.go-button:hover {
+  background-color: #b10505e6;
+}
+
+/* Objective Display Area */
+.city-objective {
+  font-size: 1.2em;
+  color: #000000;
+  margin-top: 20px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #e0dddd7d;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+body {
+  font-family: 'Arial', sans-serif;
+  transition: background-image 0.5s ease-in-out;
+  background-color: #f4f4f9;
+  color: #333;
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+/* Dropdown Styling */
+.dropdown-container {
+  margin: 20px 0;
+}
+
+.city-dropdown {
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+/* Button Styling */
+.go-button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  font-size: 1em;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.go-button:hover {
+  background-color: #0056b3;
+}
+
+/* Problem Display Area */
+.city-problem {
+  font-size: 1.2em;
+  margin-top: 20px;
+  max-width: 600px;
+  padding: 20px;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  color: #ffffff;
+  display: none;
+}
+
+.city-problem.active {
+  display: block;
+}
+
+h1 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+/*Methodology*/
+/* Content Styling */
+h1 {
+font-size: 2.0rem;
+color: #34495e;
+text-align: center;
+margin-bottom: 1rem;
+animation: fadeIn 1s ease-in-out;
+}
+
+
+/* Animations */
+@keyframes fadeIn {
+from {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+to {
+  opacity: 1;
+  transform: translateY(0);
+}
+}
+
+
+/*analysis*/
+/* General Reset */
+body {
+font-family: Arial, sans-serif;
+margin: 0;
+padding: 0;
+}
+
+/* Navigation Bar */
+.navbar {
+display: flex;
+background-color: #333;
+padding: 10px;
+justify-content: center;
+}
+
+.nav-button {
+color: #fff;
+text-decoration: none;
+padding: 10px 20px;
+margin: 0 5px;
+transition: all 0.3s ease-in-out;
+}
+
+.nav-button:hover {
+background-color: #96918d; /* Orange background on hover */
+color: #fff;
+border-radius: 5px;
+transform: scale(1.1); /* Slight zoom effect */
+}
+
+/* Buttons */
+.search-button,
+.navigate-button {
+background-color: #4CAF50; /* Green background */
+color: white;
+border: none;
+padding: 10px 20px;
+margin-top: 10px;
+cursor: pointer;
+font-size: 16px;
+transition: all 0.3s ease-in-out;
+}
+
+.search-button:hover,
+.navigate-button:hover {
+background-color: #45a049; /* Darker green */
+transform: translateY(-3px); /* Subtle upward motion */
+box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Shadow effect */
+}
+
+/* Dropdown Select */
+select {
+padding: 10px;
+border: 1px solid #ccc;
+border-radius: 5px;
+background-color: #f9f9f9;
+cursor: pointer;
+transition: border-color 0.3s ease;
+}
+
+select:hover {
+border-color: #333; /* Darker border on hover */
+}
+
+/* Footer Links */
+.footer-links a {
+color: #007BFF;
+text-decoration: none;
+margin: 0 10px;
+transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.footer-links a:hover {
+color: #0056b3; /* Darker blue */
+text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3); /* Text glow effect */
+}
+
+/* Scrolling Text in Footer */
+.scrolling-text {
+font-size: 14px;
+color: #555;
+text-align: center;
+padding: 10px;
+animation: scroll-text 10s linear infinite;
+}
+
+@keyframes scroll-text {
+0% {
+  transform: translateX(100%);
+}
+100% {
+  transform: translateX(-100%);
+}
+}
+
+/* Team Section Styles */
+.team-section {
+  text-align: center;
+  padding: 50px 20px;
+  background-color: #f4f4f4;
+}
+
+.team-section h1 {
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+  color: #333;
+}
+
+.team-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+
+/* Individual Team Member Card Styles */
+.team-member {
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 280px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.team-member:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.image-box {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-box img {
+  width: 150px; /* Set a fixed width for the image */
+  height: 150px; /* Set a fixed height for the image */
+  object-fit: cover;
+  border-radius: 50%; /* Make the image round */
+  border: 3px solid #a8a6a6; /* Optional: white border around the image */
+  transition: transform 0.3s ease; /* Smooth transition for scaling */
+}
+
+.team-member:hover .image-box img {
+  transform: scale(1.1); /* Scale the image on hover */
+}
+
+.team-member h2 {
+  margin: 15px 0;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.team-member p {
+  font-size: 1rem;
+  color: #777;
+}
+
+.social-links {
+  margin: 15px 0;
+}
+
+.social-links .icon {
+  margin: 0 10px;
+  font-size: 1.5rem;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.social-links .icon:hover {
+  color: #0077b5; /* LinkedIn color */
+}
+
+.social-links .icon.email:hover {
+  color: #ea4335; /* Gmail color */
+}
+
+.social-links .icon.portfolio:hover {
+  color: #4caf50; /* Green color */
+}
+/*footer*/
+/* Footer styling */
+footer {
+position: fixed;
+bottom: 0;
+width: 100%;
+background: #7876768b; /* Dark background */
+color: #fff;
+text-align: center;
+font-family: Arial, sans-serif;
+padding: 10px 0;
+box-shadow: 0 -2px 5px rgba(109, 108, 108, 0);
+z-index: 1000;
+}
+
+/* Scrolling text */
+.scrolling-text {
+overflow: hidden;
+white-space: nowrap;
+display: block;
+animation: scroll-left 20s linear infinite;
+}
+
+@keyframes scroll-left {
+from {
+  transform: translateX(100%);
+}
+to {
+  transform: translateX(-100%);
+}
+}
+
+/* Footer links */
+.footer-links {
+margin-top: 5px;
+}
+
+.footer-links a {
+color: #00bcd4; /* Light blue links */
+text-decoration: none;
+margin: 0 10px;
+font-size: 14px;
+transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+color: #ff5722; /* Orange color on hover */
+}
