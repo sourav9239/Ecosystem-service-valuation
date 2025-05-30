@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECOSYSTEM SERVICE VALUATION OF METROPOLITAN CITIES</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+      
+      
+
+        /* Styles for the navigation bar */
+       
+        .flowchart-wrapper {
+            display: flex; /* Flexbox for horizontal layout */
+            flex-direction: row; /* Arrange content horizontally */
+            justify-content: space-between; /* Space out flowchart and description */
+            align-items: stretch; /* Make children (flowchart and description) stretch to fill height */
+            position: relative;
+            background-color: transparent; /* White background for the box */
+            border: 1px solid transparent; /* Subtle border for the box */
+            border-radius: 12px; /* Rounded corners for the box */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+            padding: 20px; /* Internal padding for the box */
+            width: 98vw; /* Span almost full viewport width */
+            /* Adjusted height to account for the navbar */
+            height: calc(96vh - 60px); /* Approx. 50px for nav + some margin */
+            margin-top: 20px; /* Space between nav and flowchart */
+            box-sizing: border-box;
+            overflow: hidden; /* Ensures no scrollbars on the wrapper itself */
+        }
+
+        .flowchart-container {
+            position: relative; /* Crucial for absolute positioning of nodes */
+            padding: 0;
+            box-sizing: border-box;
+            overflow: hidden;
+            flex-shrink: 0;
+            flex-grow: 1;
+            min-width: 700px;
+            height: 100%;
+        }
+
+        /* --- Flowchart Node Styling --- */
+        .node {
+            background: linear-gradient(135deg, #2a9d8f, #264653); /* Teal to Dark Blue */
+            color: white;
+            padding: 15px 10px;
+            border-radius: 25px;
+            text-align: center;
+            font-size: 0.9em;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+            white-space: normal;
+            line-height: 1.2;
+            position: absolute; /* Nodes are now absolutely positioned */
+        }
+
+        .node:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(135deg, #38c1b7, #315b6d);
+        }
+
+        .node.selected {
+            background: linear-gradient(135deg, #e76f51, #f4a261);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            border: 2px solid #fff;
+            transform: scale(1.02);
+        }
+
+        /* --- SVG for Arrows --- */
+        .flowchart-svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Allows clicks to pass through to nodes */
+            z-index: 0;
+        }
+
+        .flow-arrow {
+            stroke: #4a5568;
+            stroke-width: 3;
+            fill: none;
+            transition: stroke 0.2s ease, stroke-width 0.2s ease;
+        }
+
+        .flow-arrow:hover {
+            stroke: #e76f51;
+            stroke-width: 4;
+        }
+
+        /* Define arrowhead marker */
+        #arrowhead {
+            fill: #4a5568;
+            transition: fill 0.2s ease;
+        }
+        /* Style for when an arrow is associated with a selected node */
+        #arrowhead-active path { /* Target the path inside the active marker */
+            fill: #e76f51;
+        }
+        .flow-arrow.associated-active {
+            stroke: #e76f51;
+            stroke-width: 4;
+        }
+
+.description-panel {
+    width: 340px;
+    background: #f9f9f9;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+    font-family: 'Segoe UI', sans-serif;
+    box-sizing: border-box;
+    overflow-y: auto;
+    max-height: 100vh;
+    border-left: 6px solid #2a9d8f;
+    position: relative;
+}
+
+.description-panel::before {
+    content: "";
+    position: absolute;
+    top: 20px;
+    left: -14px;
+    width: 10px;
+    height: 10px;
+    background: #2a9d8f;
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px #e0f7f5;
+}
+
+.description-panel h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #264653;
+    border-bottom: 2px dashed #e76f51;
+    padding-bottom: 5px;
+    position: relative;
+}
+
+.description-panel p {
+    color: #444;
+    font-size: 0.98em;
+    line-height: 1.6;
+    margin: 12px 0;
+    padding-left: 18px;
+    position: relative;
+}
+
+.description-panel p::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #e76f51;
+    font-size: 1.2em;
+    line-height: 1.6;
+}
+
+.description-badge {
+    display: inline-block;
+    background: #e76f51;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75em;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+    </style>
+</head>
+<body class="objectives-page">
+    <nav class="navbar">
+        <div class="logo-container">
+            <a href="index.html">
+                <img src="image\logo (2).png" alt="ESV Logo" class="logo">
+            </a>
+        </div>
+        <a href="index.html" class="nav-button">Home</a>
+        <a href="objectives.html" class="nav-button">Objectives of the study </a>
+        <a href="methodology.html" class="nav-button" target="_blank">Methodology</a>
+        <a href="Analysis.html" class="nav-button">Analysis & Discussion</a>
+        <a href="conclusion.html" class="nav-button">Conclusion & Recommendation</a>
+        <a href="acknowledgement.html" class="nav-button active">Acknowledgment & Our Team</a>
+    </nav>
+
+    <div class="flowchart-wrapper">
+        <div class="flowchart-container">
+            <svg class="flowchart-svg">
+                <defs>
+                    <marker id="arrowhead" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                        <path d="M 0 0 L 10 5 L 0 10 z" />
+                    </marker>
+                    <marker id="arrowhead-active" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#e76f51" />
+                    </marker>
+                </defs>
+            </svg>
+
+            <div class="node" id="node-database" data-title="Database" data-description="The central repository for all raw and processed data, including satellite imagery, administrative boundaries, and census information.">DATABASE</div>
+
+            <div class="node" id="node-satellite" data-title="Satellite Temporal Data" data-description="The study utilized satellite imagery from  1990, 2000, 2010, and 2020  (decadal intervals), sourced from the  USGS Earth Explorer platform (https://earthexplorer.usgs.gov/), ensuring temporal consistency and accessibility. For   1990, 2000, and 2010, data were acquired from   Landsat 5 Thematic Mapper (TM), while   2020  imagery was obtained from  Landsat 8 Operational Land Imager/Thermal Infrared Sensor (OLI/TIRS). All datasets maintained a   30-meter spatial resolution  and adhered to strict  temporal criteria: imagery from the same seasonal window (e.g., summer) with   ≤10% cloud cover  to minimize atmospheric interference and phenological variability. City-specific satellite scenes were selected based on their  Worldwide Reference System (WRS-2) Path/Row identifiers:   Delhi  (Path/Row inferred from regional coverage),  Mumbai (148/47),   Kolkata (138/44),   Chennai (142/51),   Bengaluru (144/51), and   Hyderabad (144/48) . These identifiers ensured precise geographic alignment of scenes to metropolitan boundaries, enabling consistent multi-temporal analysis of urbanization and ecosystem changes across India’s major cities.">Satellite Temporal Data</div>
+            <div class="node" id="node-admin" data-title="Administrative Maps" data-description="The Administrative Maps component involved sourcing jurisdictional boundary data (e.g., city limits, municipal wards, zoning districts) from governmental or municipal authorities to define the spatial framework of the metropolitan cities under study. These maps, which included political Ward boundary and administrative boundaries for cities like Delhi(272 no. of wards), Mumbai(24 no. of administrative zones ), Kolkata(141 no. of wards), Chennai(200 no. of wards), Bengaluru(243 no.of wards), and Hyderabad(150 no. of Wards), were georeferenced to align with satellite imagery (e.g., Landsat data) using ground control points (GCPs) in GIS software like ArcGIS or QGIS. This ensured that administrative units (e.g., municipal zones, urban/rural demarcations) spatially matched real-world features captured in satellite data..">Administrative Maps</div>
+            <div class="node" id="node-demographic" data-title="Demographic Data" data-description="The Demographic Data component incorporated socio-economic and population statistics to analyze human-environment interactions in metropolitan cities. Data were sourced from national and regional repositories such as the Census of India (https://censusindia.gov.in/) and NFHS (National Family Health Survey), spanning decadal intervals (1990, 2000, 2010, 2020) to align with the satellite imagery timeline. Key variables included population density, literacy rates, income levels, employment patterns, household size, and urban-rural migration trends. These datasets were aggregated to administrative units (e.g., municipal wards, districts) and spatially linked to the study area boundaries using GIS software.">Demographic Data</div>
+
+            <div class="node" id="node-georeferencing" data-title="Georeferencing" data-description="Georeferencing is the process of assigning real-world geographic coordinates (e.g., latitude/longitude or a projected coordinate system like UTM) to spatial data, such as satellite imagery, maps, or scanned documents. This ensures all datasets align accurately within a common spatial framework (e.g., WGS84). By georeferencing, disparate layers—like administrative boundaries, satellite images—can be precisely overlaid and analyzed together. This step is critical for maintaining spatial accuracy in GIS analyses, enabling reliable comparisons, and forming the basis for tasks like land-use classification or urban extraction in your study. Tools like ArcGIS or QGIS are typically used to perform this alignment.">Georeferencing</div>
+
+            <div class="node" id="node-spatial-layer-creation" data-title="Spatial Layer Creation" data-description="The layer stacking process in ERDAS software was employed to merge individual spectral bands of Landsat satellite imagery into a single composite image. For Landsat 5, bands 1 (blue), 2 (green), 3 (red), 4 (near-infrared), and 5 (shortwave infrared) were combined, while for Landsat 8, bands 2 (blue), 3 (green), 4 (red), 5 (near-infrared), 6 (shortwave infrared 1), and 7 (shortwave infrared 2) were stacked. This process integrates the multispectral data into a unified raster layer, enhancing the spectral information available for analysis. By aligning these bands spatially and radiometrically, the stacked image retains the unique reflectance characteristics of each wavelength, enabling advanced analyses such as vegetation indices (e.g., NDVI), land-use classification, or urban feature extraction.">Spatial Layer Creation</div>
+
+            <div class="node" id="node-study-area-extraction" data-title="Study Area Extraction" data-description="In the Study Area Extraction phase, the satellite imagery was spatially clipped to align with the administrative boundaries of the metropolitan cities using subsetting or masking techniques in ERDAS Imagine or ArcGIS software. This process involved overlaying the georeferenced administrative boundary layer (e.g., city limits) onto the satellite data (e.g., Landsat 5 or 8 imagery) and extracting only the pixels or raster areas falling within those boundaries..">Study Area Extraction</div>
+            <div class="node" id="node-spatial-database-generation" data-title="Spatial Database Generation" data-description="The Spatial Database Generation phase unified all processed datasets into a centralized repository using ArcGIS and QGIS, integrating georeferenced satellite imagery (Landsat 5 TM and Landsat 8 OLI/TIRS), administrative boundaries, demographic statistics, LULC maps (1990–2020), urban extents, and ecosystem service valuation (ESV) coefficients. The database was structured relationally, linking layers via shared identifiers (e.g., administrative unit IDs) and geographic coordinates to ensure spatial alignment (30m resolution, consistent projection). Validation checks addressed topological consistency, resolution matching, and temporal coherence. This framework enabled multi-temporal queries, trend analysis (e.g., urbanization vs. green cover loss), and scenario modeling, supporting assessments of ecosystem service trade-offs.">Spatial Database Generation</div>
+            <div class="node" id="node-comparative-assessment" data-title="Comparative Assessment" data-description="The   Comparative Assessment   analyzed cross-city and temporal trends (1990–2020) in urbanization, LULC shifts, and ecosystem service values (ESV) across Delhi, Mumbai, Kolkata, Chennai, Bengaluru, and Hyderabad. Metrics like   urban expansion rates  ,   green cover loss  , and   ESV decline   were quantified using statistical tools (e.g., change detection matrices, spatial metrics like patch density) and visualized through maps and graphs. Cities were ranked based on ESV degradation (e.g., Mumbai’s coastal wetland loss vs. Delhi’s air quality decline), while drivers like population growth, policy gaps, or economic priorities were linked to ecological impacts via Dematel-derived causal networks. The assessment revealed disparities in sustainability trajectories (e.g., Bengaluru’s rapid sprawl vs. Chennai’s water stress), offering targeted insights for region-specific policies (e.g., prioritizing green infrastructure in high-growth zones, conserving critical habitats). This synthesis connected spatial, demographic, and ecological datasets to frame actionable strategies for balancing metropolitan development with ecosystem resilience.">Comparative Assessment</div>
+
+            <div class="node" id="node-landuse-classification" data-title="Landuse Classification" data-description="In the Landuse Classification process, a Land Use Land Cover (LULC) map was generated using ERDAS software by analyzing year-wise satellite imagery (e.g., Landsat 5 or 8) for the metropolitan study area. The classification involved categorizing pixels into 6–7 distinct LULC classes, such as urban built-up areas, vegetation (forests, parks), water bodies, agricultural land, bare soil, wetlands, and mixed land uses, depending on the study’s specific needs. Supervised classification techniques, including the use of training samples and algorithms like Maximum Likelihood, were applied to assign spectral signatures from the satellite bands to each class. Post-classification refinement, such as recoding, clumping, and sieving, was performed to reduce noise and improve map accuracy.">Landuse Classification</div>
+            <div class="node" id="node-urban-extraction" data-title="Urban Extraction" data-description="In the Urban Extraction process, urban areas within the metropolitan cities were delineated directly from the classified Land Use Land Cover (LULC) maps generated in ERDAS software. During the LULC classification phase, one of the 6–7 predefined classes explicitly represented urban or built-up areas (e.g., residential zones, commercial infrastructure, roads). By isolating this urban class from the broader LULC map, the spatial extent of urbanization was extracted. This involved reclassifying the LULC raster to retain only the urban category and masking out non-urban classes (e.g., vegetation, water, agricultural land). Post-classification refinement, such as clumping (merging adjacent urban pixels) and sieving (removing small, isolated patches), was applied to enhance the accuracy and coherence of urban boundaries.">Urban Extraction</div>
+
+            <div class="node" id="node-impact-assessment" data-title="Impact Assessment" data-description="The Impact Assessment phase evaluated ecological and socio-economic consequences of land-use changes using the Dematel process and Ecosystem Service Valuation (ESV). The Dematel method identified causal relationships between LULC changes (e.g., urban expansion, vegetation loss) and their drivers (e.g., population growth, policy) through expert surveys, mapping key influencers like urbanization on ecosystem degradation. Concurrently, ESV assigned monetary/biophysical values (e.g., ₹/ha/year) to services (carbon storage, flood mitigation) using LULC-linked coefficients. Temporal ESV analysis (1990–2020) revealed declines in critical services (e.g., air quality regulation) and highlighted hotspots of loss or retention. Together, these methods quantified trade-offs, linked drivers to ecological impacts, and prioritized interventions (e.g., wetland conservation) to balance urban growth with sustainability in cities.">Impact Assessment</div>
+            <div class="node" id="node-ecosystem-service-valuation" data-title="Ecosystem Service Valuation" data-description="Ecosystem Service Valuation aims to quantify the economic benefits provided by urban ecosystems in Delhi, Mumbai, Kolkata, Chennai, Hyderabad, and Bangalore. Adopting a benefit-transfer approach, influenced by Robert Costanza's methodology, this involves applying existing unit valuation estimates (e.g., $/hectare/year) to the specific urban land-use types identified in each city (e.g., green spaces, water bodies). These values are carefully adapted for the Indian context, considering factors like Purchasing Power Parity (PPP) to convert global estimates to local currency and adjusting for unique ecological conditions. By multiplying these adjusted unit values by the corresponding areas, the total economic value of services like air purification, carbon sequestration, and recreation is calculated for each city, informing sustainable urban planning and policy.">Ecosystem Service Valuation</div>
+        </div>
+
+        <div class="description-panel">
+            <h3 id="description-title">Click a Node</h3>
+            <p id="description-text">Select a flowchart node to see its detailed description here.</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const flowchartContainer = document.querySelector('.flowchart-container');
+            const svg = document.querySelector('.flowchart-svg');
+            const nodes = document.querySelectorAll('.node');
+            const descriptionPanel = document.querySelector('.description-panel');
+            const descriptionTitle = document.getElementById('description-title');
+            const descriptionText = document.getElementById('description-text');
+            let selectedNode = null;
+
+            // --- Configuration for Node Positions ---
+            // YOU CAN MANUALLY CHANGE THESE VALUES (x, y, width, height) TO ADJUST NODE POSITIONS AND SIZES.
+            // x: left position in pixels relative to flowchart-container.
+            // y: top position in pixels relative to flowchart-container.
+            // width, height: dimensions of the node in pixels.
+            const nodeConfig = {
+                'node-database': { x: 280, y: 10, width: 250, height: 50 },
+                'node-satellite': { x: 80, y: 110, width: 180, height: 50 },
+                'node-admin': { x: 330, y: 110, width: 180, height: 50 },
+                'node-demographic': { x: 580, y: 110, width: 180, height: 50 },
+                'node-georeferencing': { x: 205, y: 200, width: 200, height: 50 },
+                'node-spatial-layer-creation': { x: 180, y: 290, width: 250, height: 50 },
+                'node-study-area-extraction': { x: 150, y: 380, width: 150, height: 50 },
+                'node-spatial-database-generation': { x: 330, y: 380, width: 150, height: 50 },
+                'node-comparative-assessment': { x: 630, y: 380, width: 180, height: 50 },
+                'node-landuse-classification': { x: 20, y: 480, width: 180, height: 50 },
+                'node-urban-extraction': { x: 250, y: 480, width: 180, height: 50 },
+                'node-impact-assessment': { x: 125, y: 580, width: 200, height: 50 },
+                'node-ecosystem-service-valuation': { x: 380, y: 640, width: 250, height: 50 }
+            };
+
+            // Helper function to get coordinates for a specific point on a node
+            // Accepts 'element' (the DOM node), 'xPos' (pixel, 'left', 'center', 'right', 'percentage'),
+            // and 'yPos' (pixel, 'top', 'center', 'bottom', 'percentage').
+            function getNodePoint(element, xPos, yPos) {
+                const elementLeft = element.offsetLeft;
+                const elementTop = element.offsetTop;
+                const elementWidth = element.offsetWidth;
+                const elementHeight = element.offsetHeight;
+
+                let x, y;
+
+                if (typeof xPos === 'string' && xPos.endsWith('%')) {
+                    x = elementLeft + (parseFloat(xPos) / 100) * elementWidth;
+                } else if (xPos === 'center') {
+                    x = elementLeft + elementWidth / 2;
+                } else if (xPos === 'left') {
+                    x = elementLeft;
+                } else if (xPos === 'right') {
+                    x = elementLeft + elementWidth;
+                } else { // Assume pixel offset from left edge of node
+                    x = elementLeft + xPos;
+                }
+
+                if (typeof yPos === 'string' && yPos.endsWith('%')) {
+                    y = elementTop + (parseFloat(yPos) / 100) * elementHeight;
+                } else if (yPos === 'center') {
+                    y = elementTop + elementHeight / 2;
+                } else if (yPos === 'top') {
+                    y = elementTop;
+                } else if (yPos === 'bottom') {
+                    y = elementTop + elementHeight;
+                } else { // Assume pixel offset from top edge of node
+                    y = elementTop + yPos;
+                }
+                return { x, y };
+            }
+
+            // --- Data defining the connections (arrows) ---
+            // YOU CAN MANUALLY ADJUST THE 'path' FUNCTION FOR EACH ARROW.
+            // 'from': ID of the starting node.
+            // 'to': ID of the ending node.
+            // 'path': A function that takes the actual DOM elements of the 'from' and 'to' nodes
+            //         and returns an SVG path string ('d' attribute).
+            //         Use getNodePoint to define start/end points on nodes.
+            //         Use 'M' (moveto), 'V' (vertical lineto), 'H' (horizontal lineto) for 90-degree bends.
+            const connections = [
+                // Top level splits from Database
+                {
+                    from: 'node-database', to: 'node-satellite', type: 'path',
+                    path: (fromElement, toElement) => {
+                        const start = getNodePoint(fromElement, '25%', 'bottom');
+                        const end = getNodePoint(toElement, 'center', 'top');
+                        const midY = (start.y + end.y) / 2;
+                        return `M ${start.x} ${start.y} V ${midY} H ${end.x} V ${end.y}`;
+                    }
+                },
+                {
+                    from: 'node-database', to: 'node-admin', type: 'path',
+                    path: (fromElement, toElement) => {
+                        const start = getNodePoint(fromElement, 'center', 'bottom');
+                        const end = getNodePoint(toElement, 'center', 'top');
+                        return `M ${start.x} ${start.y} V ${end.y}`;
+                    }
+                },
+                {
+                    from: 'node-database', to: 'node-demographic', type: 'path',
+                    path: (fromElement, toElement) => {
+                        const start = getNodePoint(fromElement, '75%', 'bottom');
+                        const end = getNodePoint(toElement, 'center', 'top');
+                        const midY = (start.y + end.y) / 2;
+                        return `M ${start.x} ${start.y} V ${midY} H ${end.x} V ${end.y}`;
+                    }
+                },
+
+                // Merges into Georeferencing
+                {
+                    from: 'node-satellite', to: 'node-georeferencing', type: 'path',
+                    path: (fromElement, toElement) => {
+                        const start = getNodePoint(fromElement, 'center', 'bottom');
+                        const end = getNodePoint(toElement, '25%', 'top');
+                        const midY = (start.y + end.y) / 2;
+                        return `M ${start.x} ${start.y} V ${midY} H ${end.x} V ${end.y}`;
+                    }
+                },
+                {
+                    from: 'node-admin', to: 'node-georeferencing', type: 'path',
+                    path: (fromElement, toElement) => {
+                        const start = getNodePoint(fromElement, 'center', 'bottom');
+                        const end = getNodePoint(toElement, '75%', 'top');
+                        const midY = (start.y + end.y) / 2;
+                        return `M ${start.x} ${start.y} V ${midY} H ${end.x} V ${end.y}`;
+                    }
+                },
+
+                // From Georeferencing to Spatial Layer Creation (Straight vertical)
+                {
+                    from: 'node-georeferencing', to: 'node-spatial-layer-creation', type: 'path',
+                    path: (fromElement, toElement) => {
+                        const start = getNodePoint(fromElement, 'center', 'bottom');
+                        const end = getNodePoint(toElement, 'center', 'top');
+                        return `M ${start.x} ${start.y} V ${end.y}`;
+                    }
+                },
+
+                // From Spatial Layer Creation to Study Area and Spatial DB
+                {
+                    from: 'node-spatial-layer-creation', to: 'node-study-area-extraction', type: 'path',
+                    path: (fromElement, toElement) => {
+                        const start = getNodePoint(fromElement, '25%', 'bottom');
+                        const end = getNodePoint(toElement, '55%', 'top');
+                        const midY = start.y + 25; // Small vertical segment after node
+                        return `M ${start.x} ${start.y} V ${midY} H ${end.x} V ${end.y}`;
+                    }
+                },
+                {
+                    from: 'node-spatial-layer-creation', to: 'node-spatial-database-generation', type: 'path',
+                    path: (fromElement, toElement) => {
+                        const start = getNodePoint(fromElement, '50%', 'bottom');
+                        const end = getNodePoint(toElement, 'center', 'top');
+                        const midY = (start.y + end.y) / 2;
+                        return `M ${start.x} ${start.y} V ${midY} H ${end.x} V ${end.y}`;
+                    }
+                },
+
+                // From Demographic Data to Spatial Database Generation (more defined 90-degree bends)
+                {
+                    from: 'node-demographic', to: 'node-spatial-database-generation', type: 'path',
+                    path: (fromElement, toElement) => {
+                        const start = getNodePoint(fromElement, 'center', 'bottom');
+                        const end = getNodePoint(toElement, '75%', 'top');
+                        const bendY = start.y + 50; // Extend down a bit from demographic
+                        const bendX = end.x;
+                        return `M ${start.x} ${start.y} V ${bendY} H ${bendX} V ${end.y}`;
+                    }
+                },
+                // From Spatial Database Generation to Comparative Assessment (straight horizontal)
+                {
+                    from: 'node-spatial-database-generation', to: 'node-comparative-assessment', type: 'path',
+                    path: (fromElement, toElement) => {
+                        const start = getNodePoint(fromElement, 'right', 'center');
+                        const end = getNodePoint(toElement, 'left', 'center');
+                        return `M ${start.x} ${start.y} H ${end.x}`;
+                    }
+                },
+
+                // From Study Area Extraction to Landuse Classification
+                {
+                    from: 'node-study-area-extraction', to: 'node-landuse-classification', type: 'path',
+                    path: (fromElement, toElement) => {
+                        const start = getNodePoint(fromElement, '25%', 'bottom');
+                        const end = getNodePoint(toElement, 'center', 'top');
+                        const midY = start.y + 25;
+                        return `M ${start.x} ${start.y} V ${midY} H ${end.x} V ${end.y}`;
+                    }
+                },
+                // From Study Area Extraction to Urban Extraction
+                {
+                    from: 'node-study-area-extraction', to: 'node-urban-extraction', type: 'path',
+                    path: (fromElement, toElement) => {
+                        const start = getNodePoint(fromElement, '75%', 'bottom');
+                        const end = getNodePoint(toElement, 'center', 'top');
+                        const midY = start.y + 25;
+                        return `M ${start.x} ${start.y} V ${midY} H ${end.x} V ${end.y}`;
+                    }
+                },
+
+                // From Landuse to Impact Assessment
+                {
+                    from: 'node-landuse-classification', to: 'node-impact-assessment', type: 'path',
+                    path: (fromElement, toElement) => {
+                        const start = getNodePoint(fromElement, 'center', 'bottom');
+                        const end = getNodePoint(toElement, '25%', 'top');
+                        const midY = (start.y + end.y) / 2;
+                        return `M ${start.x} ${start.y} V ${midY} H ${end.x} V ${end.y}`;
+                    }
+                },
+
+                // From Urban Extraction to Impact Assessment
+                {
+                    from: 'node-urban-extraction', to: 'node-impact-assessment', type: 'path',
+                    path: (fromElement, toElement) => {
+                        const start = getNodePoint(fromElement, 'center', 'bottom');
+                        const end = getNodePoint(toElement, '75%', 'top');
+                        const midY = (start.y + end.y) / 2;
+                        return `M ${start.x} ${start.y} V ${midY} H ${end.x} V ${end.y}`;
+                    }
+                },
+
+                // From Impact Assessment to Ecosystem Service Valuation (90-degree bend)
+                {
+                    from: 'node-impact-assessment', to: 'node-ecosystem-service-valuation', type: 'path',
+                    path: (fromElement, toElement) => {
+                        const start = getNodePoint(fromElement, 'center', 'bottom');
+                        const end = getNodePoint(toElement, 'left', 'center');
+                        const bendY = start.y + 40; // Vertical extension
+                        const bendX = end.x - 20; // Horizontal start before connecting to Ecosystem
+                        return `M ${start.x} ${start.y} V ${bendY} H ${end.x} V ${end.y}`;
+                    }
+                },
+
+                // From Spatial Database Generation to Ecosystem Service Valuation (90-degree bend)
+                {
+                    from: 'node-spatial-database-generation', to: 'node-ecosystem-service-valuation', type: 'path',
+                    path: (fromElement, toElement) => {
+                        const start = getNodePoint(fromElement, 'center', 'bottom');
+                        const end = getNodePoint(toElement, 'center', 'top');
+                        return `M ${start.x} ${start.y} V ${end.y}`; // Simple vertical line
+                    }
+                }
+            ];
+
+            // Apply positions from nodeConfig
+            function applyNodePositions() {
+                nodes.forEach(node => {
+                    const id = node.id;
+                    const config = nodeConfig[id];
+                    if (config) {
+                        node.style.left = `${config.x}px`;
+                        node.style.top = `${config.y}px`;
+                        node.style.width = `${config.width}px`;
+                        node.style.height = `${config.height}px`;
+                    }
+                });
+            }
+
+            // Draw all arrows based on connections data
+            function drawArrows() {
+                svg.innerHTML = `
+                    <defs>
+                        <marker id="arrowhead" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                            <path d="M 0 0 L 10 5 L 0 10 z" />
+                        </marker>
+                        <marker id="arrowhead-active" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#e76f51" />
+                        </marker>
+                    </defs>
+                `; // Clear existing arrows and re-add markers
+                connections.forEach(conn => {
+                    const fromElement = document.getElementById(conn.from);
+                    const toElement = document.getElementById(conn.to);
+
+                    if (fromElement && toElement) {
+                        const pathD = conn.path(fromElement, toElement);
+                        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                        path.setAttribute('d', pathD);
+                        path.setAttribute('class', 'flow-arrow');
+                        path.setAttribute('marker-end', 'url(#arrowhead)');
+                        path.dataset.from = conn.from; // Store for highlighting
+                        path.dataset.to = conn.to;     // Store for highlighting
+                        svg.appendChild(path);
+                    }
+                });
+            }
+
+            // Update arrow styles based on selected node
+            function updateArrowStyles(selectedNodeId = null) {
+                const arrows = document.querySelectorAll('.flow-arrow');
+                arrows.forEach(arrow => {
+                    const fromNode = arrow.dataset.from;
+                    const toNode = arrow.dataset.to;
+
+                    // Check if either the source or destination node is selected
+                    if (fromNode === selectedNodeId || toNode === selectedNodeId) {
+                        arrow.classList.add('associated-active');
+                        arrow.setAttribute('marker-end', 'url(#arrowhead-active)');
+                    } else {
+                        arrow.classList.remove('associated-active');
+                        arrow.setAttribute('marker-end', 'url(#arrowhead)');
+                    }
+                });
+            }
+
+            // Node click handler
+            function handleNodeClick(event) {
+                const clickedNode = event.target.closest('.node');
+                if (!clickedNode) return;
+
+                // Remove 'selected' class from previously selected node
+                if (selectedNode && selectedNode !== clickedNode) {
+                    selectedNode.classList.remove('selected');
+                }
+
+                // Toggle 'selected' class on the clicked node
+                clickedNode.classList.toggle('selected');
+
+                if (clickedNode.classList.contains('selected')) {
+                    selectedNode = clickedNode;
+                    descriptionTitle.textContent = clickedNode.dataset.title;
+                    descriptionText.textContent = clickedNode.dataset.description;
+                    updateArrowStyles(selectedNode.id); // Highlight arrows for the selected node
+                } else {
+                    selectedNode = null;
+                    descriptionTitle.textContent = 'Click a Node';
+                    descriptionText.textContent = 'Select a flowchart node to see its detailed description here.';
+                    updateArrowStyles(null); // Remove all arrow highlights
+                }
+            }
+
+            // Initial setup
+            applyNodePositions();
+            drawArrows();
+            updateArrowStyles(); // Initialize without any selected node
+
+            // Add event listeners
+            nodes.forEach(node => {
+                node.addEventListener('click', handleNodeClick);
+            });
+
+            // Redraw arrows on window resize (debounced for performance)
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    drawArrows();
+                    if (selectedNode) {
+                        updateArrowStyles(selectedNode.id);
+                    }
+                }, 100); // Debounce to prevent excessive redraws
+            });
+        });
+    </script>
+</body>
+</html>
